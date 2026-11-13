@@ -1,19 +1,24 @@
 package com.note.auth;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class TokenStore {
 
-    private static final Map<String, Long> STORE = new HashMap<>();
+    private final Map<String, Long> store = new HashMap<>();
 
-    private TokenStore() { }
-
-    public static void put(String token, Long userId) {
-        STORE.put(token, userId);
+    public void put(String token, Long userId) {
+        store.put(token, userId);
     }
 
-    public static Long get(String token) {
-        return STORE.get(token);
+    public Long get(String token) {
+        return store.get(token);
+    }
+
+    public void remove(String token) {
+        store.remove(token);
     }
 }
